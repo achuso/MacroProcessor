@@ -7,7 +7,7 @@ L1 	CMP P,X ; compare P with X
 	STA D ; store the result in D
 	BRA ENDPRG ;ending the loop
 
-MUL ASL ;multiply by 2
+MUL ASLA ;multiplies A1 by 2, since Accumulator A was already loaded with A1
 	INX ;increment X
 	BRA L1 
 
