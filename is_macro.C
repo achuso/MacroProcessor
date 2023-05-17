@@ -7,7 +7,7 @@ void is_macro(const char* line){
 
     // check if the line starts with a macro name or an #if
 
-    if(strncmp(line, "#if", 3) == 0 || strncmp(line, "#ADD", 4) == 0 || strncmp(line, "#MULT", 5) == 0 || strncmp(line, "#DIV", 4) == 0 || strncmp(line, "#REM", 4) == 0){
+    if(strncmp(line, "#if", 3) == 0 || strncmp(line, "ADD", 3) == 0 || strncmp(line, "SUB", 3) == 0 || strncmp(line, "MULT", 4) == 0 || strncmp(line, "DIV", 3) == 0 || strncmp(line, "REM", 3) == 0){
 
         expand(); // add the macro name inside 
 
