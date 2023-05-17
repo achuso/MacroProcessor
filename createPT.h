@@ -44,7 +44,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
 
         // set actual parameters
         for(int i = 1; field[i][0] != '\0'; i++)
-            strcpy(PT.actual[i], field[i]);
+            strcpy(PT.actual[i-1], field[i]);
     }
     // if macro starts with an if-statement
     else {
@@ -74,7 +74,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
 
         // set actual parameters
         for(int i = 4; field[i][0] != '\0'; i++)
-            strcpy(PT.actual[i], field[i]);
+            strcpy(PT.actual[i-4], field[i]);
     }
 
     return;
