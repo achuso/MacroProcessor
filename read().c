@@ -9,7 +9,7 @@ struct mac {
 
 struct mac buffer[10]; // memory buffer for 10 macro definitions
 int m_count; // counts the number of macro definitions
-
+int param_count;
 
 int read(char* filename) {
     FILE* file = fopen(filename, "r");
@@ -19,14 +19,14 @@ int read(char* filename) {
     }
 
     char line[256];
-    int m_count = 0;
+    m_count = 0;
     while (fgets(line, sizeof(line), file)) {
         if (strncmp(line, "#MNAME:", 5) == 0) //if line start #MNAME and its compare 5 characters
         {
             // Read macro definition
             sscanf(line, "#MNAME: %s", buffer[m_count].mname);//MNAME add buffer
             fgets(line, sizeof(line), file);
-            int param_count = 0;
+            param_count = 0;
             while (strncmp(line, "#ENDM", 5) != 0) {
                 sscanf(line, "%s", buffer[m_count].param[param_count]);//buffer have mname param andmacro
                 fgets(line, sizeof(line), file);
