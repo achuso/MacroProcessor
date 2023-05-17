@@ -1,11 +1,11 @@
 #MULT: MACRO D, A1, P
-	LDAA A1 ;load the second parameter into the accumulator
+	LDAA $A1 ;load the second parameter into the accumulator
 	LDX #1 ;will be used to count to P
-	LDAB P ;load the third parameter into the accumulator
+	LDAB $P ;load the third parameter into the accumulator
 	
 L1 	CMPB X ; compare P with X
 	BLS MUL ;branching to MUL as many times as the value of P
-	STAA D ; store the result in D
+	STAA $D ; store the result in D
 	BRA ENDPRG ;ending the loop
 
 MUL 	ASLA ;multiplies A1 by 2, since Accumulator A was already loaded with A1
