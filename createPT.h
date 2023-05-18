@@ -29,7 +29,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
         strcopy(PT.mname, field[0]);
 
         // get number of parameters
-        for(int i = 1; field[i][0] != '\0'; i++, PT.nmparams++);
+        for(int i = 1; field[i][0] != '\0'; i++, PT.nparams++);
 
         // to get dummy parameters, find the associated macro def.
         for(int i = 0; i < m_count; i++)
@@ -39,7 +39,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
                     // get dummy parameter
                     PT.dummy[j] = buffer[i].param[j];
                 }
-                break
+                break;
             }
 
         // set actual parameters
@@ -59,7 +59,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
         strcopy(PT.mname, field[3]);
 
         // get number of parameters
-        for(int i = 1; field[i][4] != '\0'; i++, PT.nmparams++);
+        for(int i = 1; field[i][4] != '\0'; i++, PT.nparams++);
 
         // to get dummy parameters, find the associated macro def.
         for(int i = 0; i < m_count; i++)
@@ -69,7 +69,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
                     // get dummy parameter
                     PT.dummy[j] = buffer[i].param[j];
                 }
-                break
+                break;
             }
 
         // set actual parameters
