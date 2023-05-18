@@ -35,7 +35,7 @@ void createPT(char field[10][7], struct mac buffer[10], int m_count) {
         for(int i = 0; i < m_count; i++)
             // !!!!! CHECK ON WITH HOW AYSEGUL STORES MACRO NAMES TO BUFFER, IF SHE'S STORING THE # AT THE BEGINNING, EDIT BOTTON LINE ACCORDINGLY
             if(strcmp(buffer[i].mname, field[0], 7) == 0) {
-                for(int j = 0; buffer[i].param[j][0] != '\0') {
+                for(int j = 0; buffer[i].param[j][0] != '\0'; j++) {
                     // get dummy parameter
                     PT.dummy[j] = buffer[i].param[j];
                 }
