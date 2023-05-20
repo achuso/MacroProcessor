@@ -3,11 +3,11 @@
 
 void expand(); 
 
-void is_macro(const char field[10][7], char* filename){  // replace line with string array
+void is_macro(const char field[10][7], char* filename){  
 
     // check if the line starts with an #if
 
-    if(strncmp(field[0], "if", 2)){ // field[0] == "if"
+    if(strncmp(field[0], "if", 2)){ 
     
     // check for conditions
     // format: #if $2 ABC M3 200 300 
