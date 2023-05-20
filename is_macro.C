@@ -46,6 +46,7 @@ void is_macro(const char field[10][7], char* filename, char** argv){
         }
 
         fprintf(f1, "\n");
+        fclose(f1);
     }
     
 }
