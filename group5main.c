@@ -1,14 +1,20 @@
 // CSE 232 Group 5
 // Term Project - Macroprocessors
+// Written by:
+// Onat Ribar           - createPT()
+// Mahny Barazandehtar  - is_macro()
+// Ayşegül Tekeli       - read()
+// Ece Tipici           - parse()
+// Emir Devlet Ertörer  - expand()
 
 #include <stdio.h>
 #include <string.h>
 
-int read(char* filename); // Ayşegül Tekeli
-void parse(char* line); // Ece Tipici
-void is_macro(const char field[][], char* outputFilename, char** argv); // Mahny Barazandehtar
-void expand(); // Emir Devlet Ertörer
-void createPT(const char field[][], struct mac, int); // Onat Ribar
+int read(char* filename);
+void parse(char* line);
+void is_macro(const char field[][], char* outputFilename, char** argv);
+void expand();
+void createPT(const char field[][], struct mac, int);
 
 // read() reads macro definitions atop the input file, stores them in mac buffer and updates m_count accordingly
 struct mac {
@@ -41,7 +47,12 @@ int main(int argc, char** argv) {
     // Open file to read
     FILE* inputFile = fopen(inputFileName, "r");
     if(inputFile == NULL) {
-        printf("Error opening file. Exiting...");
+        printf("error opening file. exiting...");
+    }
+    // Open file to write on
+    FILE* outputFile = fopen(outputFileName, "r");
+    if(outputFile == NULL) {
+        printf("error opening file. exiting...");
     }
 
     read(inputFileName);
@@ -54,6 +65,8 @@ int main(int argc, char** argv) {
     }
 
     free(currentLine);
+    fclose(outputFile);
+    fclose(inputFile);
 
     return 0;
 }
