@@ -39,7 +39,7 @@ void is_macro(const char field[10][7], char* filename, char** argv){
         //write the line into the .asm file
         FILE* f1 = fopen(filename, "a"); // creates/opens the filename and "a" apends data into the file
         
-        for(int i = 0; field[i][0] != NULL; i++){
+        for(int i = 0; field[i][0] != '\0'; i++){
 
             fprintf(f1, "%s ", field[i]); // writes the contents of the line into f1
 
