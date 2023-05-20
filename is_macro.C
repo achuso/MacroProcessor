@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>  
 
 void expand(); 
 
@@ -7,17 +8,18 @@ void is_macro(const char field[10][7], char* filename, char** argv){
 
     // check if the line starts with an if
 
-    if(strncmp(field[0], "if", 2)){
+    if(strncmp(field[0], "if", 2) == 0){
 
 
     // check for conditions:
     // example: field format: if $2 ABC M3 200 300 
     // $2 is a condition parameter that is given as an argument such that arg[2]
     // get the number after the $, pass it into arg[], and check if its equal to the thing inside the paranthesis
+        
+        int argVal = atoi(&field[1][1]);  // to extract the number after the $ and store it as an int
+        // OR we can do this field[1][1] - '0';
 
-        int argVal = field[1][1]; // to extract the number after the $
-
-        if (argv[argVal] == field[2]){
+        if (strcmp(argv[argVal], field[2]) == 0){
 
             expand();
             
