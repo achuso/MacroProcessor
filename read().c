@@ -21,10 +21,10 @@ int read(char* filename) {
     char line[256];
     m_count = 0;
     while (fgets(line, sizeof(line), file)) {
-        if (strncmp(line, "#MNAME:", 5) == 0) //if line start #MNAME and its compare 5 characters
+        if (strncmp(line, "#", 1) == 0) //if line start #MNAME and its compare 5 characters
         {
             // Read macro definition
-            sscanf(line, "#MNAME: %s", buffer[m_count].mname);//MNAME add buffer
+            sscanf(line, "#%s", buffer[m_count].mname);//MNAME add buffer
             fgets(line, sizeof(line), file);
             param_count = 0;
             while (strncmp(line, "#ENDM", 5) != 0) {
