@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
         printf("error opening file. exiting...");
     }
     // Open file to write on
-    FILE* outputFile = fopen(outputFileName, "r");
+    FILE* outputFile = fopen(outputFileName, "a");
     if(outputFile == NULL) {
         printf("error opening file. exiting...");
     }
