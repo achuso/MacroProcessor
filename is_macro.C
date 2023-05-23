@@ -4,7 +4,7 @@
 
 void expand(); 
 
-void is_macro(const char field[10][7], FILE* outputFilename, char** argv){  
+void is_macro(const char field[10][7], FILE* outputFile, char** argv){  
 
     // check if the line starts with an if
 
@@ -36,17 +36,15 @@ void is_macro(const char field[10][7], FILE* outputFilename, char** argv){
 
     }
     else{
-        //write the line into the .asm file
-        //FILE* f1 = fopen(outputFilename, "a"); // creates/opens the filename and "a" apends data into the file
+        //write the line into the .asm file       
         
         for(int i = 0; field[i][0] != '\0'; i++){
 
-            fprintf(outputFilename, "%s ", field[i]); // writes the contents of the line into f1
+            fprintf(outputFile, "%s ", field[i]); // writes the contents of the line into f1
 
         }
 
-        fprintf(outputFilename, "\n");
-        //fclose(f1);
+        fprintf(outputFile, "\n");
     }
     
 }
