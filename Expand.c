@@ -7,14 +7,12 @@ struct mac {
     char macro[256];
 };
 
-void expand(FILE* file){ // now the function recieves the file as a parameter
+void expand(FILE* file, struct pt PT){ // now the function recieves the file as a parameter
     createPT(field, buffer, m_count);  
     // take a line from the macro body
     // check if there are dummy parameters
         //if there are, substitue them with the actual parameters using the parameter table
     // and append it to f1.asm
-    
-    // !!! MAY MODIFY THIS TO PASS THE FILE f1 AS PARAMETER INSTEAD, CHECK WITH MAHNY
 
     if (file == NULL) {
         printf("Failed to open .asm file.\n");
