@@ -1,0 +1,5 @@
+#SUB: MACRO D, A1, A2
+	LDAA A1
+	SUBA A2
+	STAA D
+#END
