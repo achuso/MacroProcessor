@@ -2,9 +2,7 @@
 #include <string.h>
 #include <stdlib.h>  
 
-void expand(); 
-
-void is_macro(const char field[10][7], FILE* outputFile, char** argv){  
+void is_macro(const char field[10][7], FILE* outputFile, char** argv, struct pt PT){  
 
     // check if the line starts with an if
 
@@ -21,7 +19,7 @@ void is_macro(const char field[10][7], FILE* outputFile, char** argv){
 
         if (strcmp(argv[argVal], field[2]) == 0){
 
-            expand();
+            expand(outputFile, PT);
             
         }
         else{
@@ -32,7 +30,7 @@ void is_macro(const char field[10][7], FILE* outputFile, char** argv){
     // check if the line starts with a macro name
     else if (strncmp(field[0], "ADD", 3) == 0 || strncmp(field[0], "SUB", 3) == 0 || strncmp(field[0], "MULT", 4) == 0 || strncmp(field[0], "DIV", 3) == 0 || strncmp(field[0], "REM", 3) == 0){ 
 
-            expand();        
+            expand(outputFile, PT);        
 
     }
     else{
