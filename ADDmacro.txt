@@ -1,6 +1,0 @@
-
-#ADD: MACRO D, A1, A2
-	  LDAA  A1     ; load the first operand into the accumulator
-	  ADCA  A2     ; add the second operand to the accumulator with carry
-	  STAA  D       ; store the result in D
-#ENDM
