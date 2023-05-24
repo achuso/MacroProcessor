@@ -1,43 +1,70 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-struct mac {
-    char mname[8]; //macro name
-    char param[10][4]; // max. 10 paramaters, each parameter max. 3 characters
-    char macro[256]; // macro body
+struct macro {
+    char mname[8];
+    char param[10][4];
+    char macro[256];
 };
 
-struct mac buffer[10]; // memory buffer for 10 macro definitions
-int m_count; // counts the number of macro definitions
-int param_count;
+struct macro buffer[10];
+int m_count;
+const char punctuation[] = " ,:";
 
 int read(char* filename) {
+    m_count = 0;
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
-        printf("file couldn't open.\n");
+        printf("File couldn't be opened.\n");
         return 0;
     }
 
     char line[256];
-    m_count = 0;
-    while (fgets(line, sizeof(line), file)) {
-        if (strncmp(line, "#", 1) == 0) //if line start #MNAME and its compare 5 characters
-        {
-            // Read macro definition
-            sscanf(line, "#%s", buffer[m_count].mname);//MNAME add buffer
-            fgets(line, sizeof(line), file);
-            param_count = 0;
-            while (strncmp(line, "#ENDM", 5) != 0) {
-                sscanf(line, "%s", buffer[m_count].param[param_count]);//buffer have mname param andmacro
-                fgets(line, sizeof(line), file);
+    while (fgets(line, sizeof(line), file) ) {
+        if (strncmp(line, "#ENDM", 5) == 0) {
+            m_count++;
+        } else if (line[0] == '#' && strstr(line, ":") ) {
+            char* p;
+            char* lineP = line;
+
+            p = strtok(lineP, punctuation);
+            if (p) {
+                strcpy(buffer[m_count].mname, p + 1);
+            }
+            int param_count = 0;
+            while (p = strtok(NULL, punctuation)) {
+                strncpy(buffer[m_count].param[param_count], p, 4);
                 param_count++;
             }
-            fgets(line, sizeof(line), file);
-            strcpy(buffer[m_count].macro, line); //line buffer.macro içine kopyalandı
-            m_count++;
+        } else {
+            if (line[strlen(line) - 1] != '\0') {
+                strcat(line, "\n");
+            }
+            strcat(buffer[m_count].macro, line);
         }
     }
 
     fclose(file);
     return m_count;
+}
+
+int main() {
+   int sayı= read("inputfile.txt");
+   printf("%d\n",sayı);
+    printf("m_count: %d\n", m_count);
+
+    for (int i = 0; i < m_count; i++) {
+        printf("Macro name: %s\n", buffer[i].mname);
+        printf("Parameters: ");
+        for (int j = 0; j < 10; j++) {
+            if (strlen(buffer[i].param[j]) > 0) {
+                printf("%s ", buffer[i].param[j]);
+            }
+        }
+        printf("\n");
+        printf("Macro body:\n%s\n", buffer[i].macro);
+    }
+
+    return 0;
 }
