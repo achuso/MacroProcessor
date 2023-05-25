@@ -34,7 +34,7 @@ int read(char* filename) {
             }
             int param_count = 0;
             while (p = strtok(NULL, punctuation)) {
-                strncpy(buffer[m_count].param[param_count], p, 4);
+                strncpy(buffer[m_count].param[param_count], p, 4);// param includes "MACRO" so you should start 1 instead of 0 when you using param array
                 param_count++;
             }
         } else {
