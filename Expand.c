@@ -7,46 +7,48 @@ struct mac {
     char macro[256];
 };
 
-void expand(FILE* file, struct pt PT){ // now the function recieves the file as a parameter
-    createPT(field, buffer, m_count);  
-    // take a line from the macro body
-    // check if there are dummy parameters
-        //if there are, substitue them with the actual parameters using the parameter table
-    // and append it to f1.asm
+void expand(FILE* file){
+    createPT();
 
-    if (file == NULL) {
-        printf("Failed to open .asm file.\n");
-        return;
-    } 
-    // iterate and find the macro definition for the current macro.
-    struct mac* macroDef = NULL;
-    for(int i = 0; i < m_count; i++) {
-        if (strcmp(buffer[i].mname, PT.mname) == 0) {
-            macroDef = &buffer[i];
-            break;
-        }
-    }    
-    // If the macro definition was not found return.
-    if (macroDef == NULL) {
-        printf("Macro definition not found.\n");
-        return;
-    }
-    
-    // For each line in the macro definition.
-    char* line = strtok(macroDef->macro, "\n"); // goes line by line through the macro body
-    while (line != NULL) {
-        // For each dummy parameter in the parameter table.
-        for(int i = 0; i < PT.nparams; i++) {
-            // Replace all occurrences of the dummy parameter in the line with its corresponding actual parameter.
-            while ((line = strstr(line, PT.dummy[i])) != NULL) { // searches for the first occurrence of the dummy parameter in the current line.
-                // copies the actual parameter over the dummy parameter in the line
-                strncpy(line, PT.actual[i], strlen(PT.actual[i]));
-                // Move the line pointer forward by the length of the actual parameter.
-                line += strlen(PT.actual[i]);
+    // find the correct macro in the buffer
+    for(int i = 0; i < m_count; i++){
+        if(strcmp(buffer[i].mname, PT.mname) == 0){
+            char* p = buffer[i].macro;
+
+            while(*p != '\0'){
+                // if it encounters a '$' sign, this indicates a dummy parameter
+                if(*p == '$'){
+                    // print the $
+                    fprintf(file, "%s", "$");
+                    // skip it
+                    p++;
+
+                    // to consider multiple characters, i am creating a temporary buffer
+                    char temp_param[5] = "";  // maximum of 5 characters for parameter names, like "A1"
+                    for(int k = 0; k < 5 && *p != ' ' && *p != '\n' && *p != '\0'; k++, p++)
+                        temp_param[k] = *p;
+                    if(temp_param[2] == '1' ||  temp_param[2] == '2'){
+                        temp_param[3] = '\0';
+                    }
+
+                    // matching the dummy parameters
+                    for(int j = 1; j < PT.nparams + 1; j++){
+                        if(strcmp(temp_param, PT.dummy[j]) == 0){
+                            // print the corresponding actual parameter to the output file
+                            fprintf(file, "%s", PT.actual[j]);
+                        }
+
+                    }
+
+                }
+                else {
+                    // print the character as is
+                    fprintf(file, "%c", *p);
+                    p++;
+                }
             }
-        }       
-        // Write the line to the .asm file.
-        fprintf(file, "%s\n", line);  
-        line = strtok(NULL, "\n"); //  gets the next line 
+
+            fprintf(file, "\n");
+        }
     }
 }
